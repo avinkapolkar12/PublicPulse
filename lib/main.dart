@@ -36,8 +36,8 @@ class PublicPulseApp extends StatelessWidget {
         '/citizenHome': (context) => const CitizenHomePage(),
         '/adminHome': (context) => const AdminHomePage(),
         '/citizenOptions': (context) => const CitizenOptionsPage(),
-        '/complaint': (context) => ComplaintPage(), // Complaint page route
-        '/account':(context) => AccountSettingsPage(),
+        '/complaint': (context) => const ComplaintPage(), // Complaint page route
+        '/account':(context) => const AccountSettingsPage(),
       },
     );
   }
@@ -108,7 +108,7 @@ class SplashScreen extends StatelessWidget {
 class BackgroundImageWrapper extends StatelessWidget {
   final Widget child; // The main content of each page will be passed here
 
-  const BackgroundImageWrapper({required this.child, Key? key}) : super(key: key);
+  const BackgroundImageWrapper({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -736,7 +736,7 @@ class CitizenHomePage extends StatelessWidget {
         void navigateToSettings(BuildContext context) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AccountSettingsPage()),
+            MaterialPageRoute(builder: (context) => const AccountSettingsPage()),
           );
         }
       },
@@ -744,7 +744,7 @@ class CitizenHomePage extends StatelessWidget {
         backgroundColor: Colors.blue,
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
       ),
-      child: Text(label, style: TextStyle(color: Colors.white)),
+      child: Text(label, style: const TextStyle(color: Colors.white)),
     );
   }
 
@@ -896,7 +896,7 @@ class AdminHomePage extends StatelessWidget {
         backgroundColor: Colors.blue,
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
       ),
-      child: Text(label, style: TextStyle(color: Colors.white)),
+      child: Text(label, style: const TextStyle(color: Colors.white)),
     );
   }
 }
@@ -906,6 +906,8 @@ class AdminHomePage extends StatelessWidget {
 //Complaint Page
 
 class ComplaintPage extends StatefulWidget {
+  const ComplaintPage({super.key});
+
   @override
   _ComplaintPageState createState() => _ComplaintPageState();
 }
@@ -955,7 +957,7 @@ class _ComplaintPageState extends State<ComplaintPage> {
 
       // Show a loading indicator while uploading
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Uploading file...')),
+        const SnackBar(content: Text('Uploading file...')),
       );
 
       try {
@@ -976,7 +978,7 @@ class _ComplaintPageState extends State<ComplaintPage> {
         });
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('File uploaded successfully!')),
+          const SnackBar(content: Text('File uploaded successfully!')),
         );
       } catch (e) {
         // Catch and print errors
@@ -1008,7 +1010,7 @@ class _ComplaintPageState extends State<ComplaintPage> {
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Complaint Submitted Successfully')),
+        const SnackBar(content: Text('Complaint Submitted Successfully')),
       );
       Navigator.pop(context);
     } catch (e) {
@@ -1150,27 +1152,29 @@ class _ComplaintPageState extends State<ComplaintPage> {
 
 
 class AccountSettingsPage extends StatelessWidget {
+  const AccountSettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Edit Profile Section
-            Text(
+            const Text(
               'Edit Profile Settings',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const SizedBox(height: 16.0),
 
             // Address
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.location_on),
                 labelText: '123 Main St, City, Country',
@@ -1180,7 +1184,7 @@ class AccountSettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
 
             // Phone Number
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.phone),
                 labelText: '+1234567890',
@@ -1190,7 +1194,7 @@ class AccountSettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
 
             // Email
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 labelText: 'user@example.com',
@@ -1200,7 +1204,7 @@ class AccountSettingsPage extends StatelessWidget {
             const SizedBox(height: 16.0),
 
             // Name
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.person),
                 labelText: 'John Doe',
@@ -1211,12 +1215,12 @@ class AccountSettingsPage extends StatelessWidget {
             const SizedBox(height: 32.0),
 
             // About Public Pulse Section
-            Text(
+            const Text(
               'About Public Pulse',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const SizedBox(height: 8.0),
-            Text(
+            const Text(
               'Public Pulse is dedicated to providing a platform for citizens\' grievances to government departments. '
                   'Our mission is to empower citizens who want to make the government departments aware of the difficulties faced by them.',
               style: TextStyle(fontSize: 16),
@@ -1225,12 +1229,12 @@ class AccountSettingsPage extends StatelessWidget {
             const SizedBox(height: 24.0),
 
             // Contact Information
-            Text(
+            const Text(
               'Contact Information',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const SizedBox(height: 8.0),
-            Text('For support, reach out to us via email or phone.', style: TextStyle(fontSize: 16)),
+            const Text('For support, reach out to us via email or phone.', style: TextStyle(fontSize: 16)),
             const SizedBox(height: 16.0),
 
             // Email Support and Call Support buttons
@@ -1241,8 +1245,8 @@ class AccountSettingsPage extends StatelessWidget {
                     onPressed: () {
                       // Add email support action
                     },
-                    icon: Icon(Icons.email, color: Colors.white),
-                    label: Text('Email support'),
+                    icon: const Icon(Icons.email, color: Colors.white),
+                    label: const Text('Email support'),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white, backgroundColor: Colors.purple,
                     ),
@@ -1254,8 +1258,8 @@ class AccountSettingsPage extends StatelessWidget {
                     onPressed: () {
                       // Add call support action
                     },
-                    icon: Icon(Icons.phone, color: Colors.white),
-                    label: Text('Call Support'),
+                    icon: const Icon(Icons.phone, color: Colors.white),
+                    label: const Text('Call Support'),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white, backgroundColor: Colors.purple,
                     ),
@@ -1267,7 +1271,7 @@ class AccountSettingsPage extends StatelessWidget {
             const SizedBox(height: 32.0),
 
             // General Settings Section
-            Text(
+            const Text(
               'General Settings',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -1275,29 +1279,29 @@ class AccountSettingsPage extends StatelessWidget {
 
             // General settings list tiles
             ListTile(
-              leading: Icon(Icons.notifications),
-              title: Text('Notification Preferences'),
+              leading: const Icon(Icons.notifications),
+              title: const Text('Notification Preferences'),
               onTap: () {
                 // Navigate to notification preferences
               },
             ),
             ListTile(
-              leading: Icon(Icons.lock),
-              title: Text('Privacy Settings'),
+              leading: const Icon(Icons.lock),
+              title: const Text('Privacy Settings'),
               onTap: () {
                 // Navigate to privacy settings
               },
             ),
             ListTile(
-              leading: Icon(Icons.language),
-              title: Text('Language Selection'),
+              leading: const Icon(Icons.language),
+              title: const Text('Language Selection'),
               onTap: () {
                 // Navigate to language selection
               },
             ),
             ListTile(
-              leading: Icon(Icons.security),
-              title: Text('Account Security'),
+              leading: const Icon(Icons.security),
+              title: const Text('Account Security'),
               onTap: () {
                 // Navigate to account security settings
               },
